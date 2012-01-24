@@ -16,19 +16,23 @@ hlda implementations by David Blei (cf. [1] and [2]):
 run 'python text2ldac --help' for information about its usage.
 
 [1] http://www.cs.princeton.edu/~blei/lda-c/
+
 [2] http://www.cs.princeton.edu/~blei/downloads/hlda-c.tgz (starts download)
 
-#This file is part of text2ldac.
+Licensing
+---------
 
-#text2ldac is free software: you can redistribute it and/or modify
-#it under the terms of the GNU General Public License as published by
-#the Free Software Foundation, either version 3 of the License, or
-#(at your option) any later version.
+This file is part of text2ldac.
 
-#text2ldac is distributed in the hope that it will be useful,
-#but WITHOUT ANY WARRANTY; without even the implied warranty of
-#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#GNU General Public License for more details.
+text2ldac is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-#You should have received a copy of the GNU General Public License
-#along with text2ldac. If not, see <http://www.gnu.org/licenses/>.
+text2ldac is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with text2ldac. If not, see <http://www.gnu.org/licenses/>.
