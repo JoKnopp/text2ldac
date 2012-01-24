@@ -1,5 +1,22 @@
 #!/bin/sh
 
+#This file is part of text2ldac.
+
+#text2ldac is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+
+#text2ldac is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+
+#You should have received a copy of the GNU General Public License
+#along with text2ldac. If not, see <http://www.gnu.org/licenses/>.
+
+
+
 import argparse
 import codecs
 import os
@@ -10,8 +27,8 @@ import sys
 __doc = \
 '''
 This is a program to convert documents into the file format used by David
-Blei's lda-c (and hlda-c) implementation. It generates the .dat and .vocab
-files from given text files.
+Blei's lda-c (and hlda-c) implementation. It generates the .dat, .vocab and
+.dmap files from .txt files in a given directory.
 
 cf. http://www.cs.princeton.edu/~blei/lda-c/readme.txt
 '''
@@ -22,7 +39,7 @@ def init_parser():
     Returns an argument parser configured with options for this program
     '''
     parser = argparse.ArgumentParser(
-            description='A program to convert documents to .dat and .vocab files'
+            description='A program to convert documents to .dat, .vocap and .dmap files'
             )
 
     #positional argument
@@ -80,7 +97,7 @@ def load_stopwords(stopword_filename):
     with codecs.open(stopword_filename, 'r', 'utf-8') as sf:
         for line in sf:
             if len(line.split()) != 1:
-                print('ignoring line with more than one word:\n"{0}"'.format(
+                print('ignoring line with more than one stopword:\n"{0}"'.format(
                     line))
                 continue
             stopwords.add(line.strip())
