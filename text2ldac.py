@@ -197,6 +197,7 @@ if __name__=='__main__':
     dirname = dirname + os.sep if not dirname.endswith(os.sep) else dirname
     #directory for results
     outdir_name = parser.outdir if parser.outdir else dirname
+    outdir_name = outdir_name + os.sep if not outdir_name.endswith(os.sep) else outdir_name
     #prefix of the .dat and .vocab files
     basename = os.path.dirname(dirname).split('/')[-1]
 
