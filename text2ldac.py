@@ -122,26 +122,31 @@ def generate_dat_lines_and_word_ids(fnames, config):
         freq_dict = dict()
         new_words = set()
 
-        with codecs.open(docname, 'r', 'utf-8') as doc:
-            for line in doc:
-                for word in line.split():
-                    word = clean_word(word)
+        try:
+            with codecs.open(docname, 'r', 'utf-8') as doc:
+                for line in doc:
+                    for word in line.split():
+                        word = clean_word(word)
 
-                    if len(word) < config['minlength'] or word in config['stopwords']:
-                        continue
+                        if len(word) < config['minlength'] or word in config['stopwords']:
+                            continue
 
-                    #word occurrs for the first time
-                    if not word_id_dict.has_key(word):
-                        freq_dict[word] = 1
-                        word_id_dict[word] = len(word_id_dict)
-                        new_words.add(word)
-                    #word may be in word_id_dict but not yet in freq_dict
-                    else:
-                        freq = freq_dict.setdefault(word, 0)
-                        freq_dict[word] = freq + 1
+                        #word occurrs for the first time
+                        if not word_id_dict.has_key(word):
+                            freq_dict[word] = 1
+                            word_id_dict[word] = len(word_id_dict)
+                            new_words.add(word)
+                        #word may be in word_id_dict but not yet in freq_dict
+                        else:
+                            freq = freq_dict.setdefault(word, 0)
+                            freq_dict[word] = freq + 1
+        except UnicodeDecodeError as u_error:
+            print('Document "{0}" has encoding errors and is ignored!\n{1}'.format(
+                docname, u_error))
+
 
         if len(freq_dict)==0: #did the document contribute anything?
-            print('Document {0} (#{1}) seems to be empty and is ignored!'.format(
+            print('Document "{0}" (#{1}) seems to be empty and is ignored!'.format(
                 docname,fnames.index(docname)))
             continue
         else:
