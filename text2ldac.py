@@ -1,5 +1,3 @@
-#!/bin/sh
-
 #This file is part of text2ldac.
 
 #text2ldac is free software: you can redistribute it and/or modify
