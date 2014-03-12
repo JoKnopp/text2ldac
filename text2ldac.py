@@ -110,6 +110,18 @@ def write_document_map_file(fnames, dmap_fname):
         for title in fnames:
             d_file.write(title + '\n')
 
+def reindex(word_id_dict, min_index):
+    """
+    re-index the word_id for word_id pairs to guarantee that the max
+    index of the word matches/reflects number of words in word dict
+    """
+    num_word_shifts = 0
+    for word in word_id_dict:
+        cur_index = word_id_dict[word]
+
+        if cur_index > min_index:
+            word_id_dict[word] = min_index + num_word_shifts
+            num_word_shifts += 1
 
 def generate_dat_lines_and_word_ids(fnames, config):
     dat_lines = [] #.dat file output
@@ -153,11 +165,18 @@ def generate_dat_lines_and_word_ids(fnames, config):
         #remove words that do not reach minoccurrence
         remove_list = [word for word in freq_dict.iterkeys() if\
             freq_dict[word] < config['minoccurrence']]
+        #smallest index of a word that is removed
+        remove_word_min_index = len(word_id_dict)
+
         for word in remove_list:
             freq_dict.pop(word)
             #if they are new also remove them from word_id_dict
             if word in new_words:
+                word_index = word_id_dict[word]
+                if word_index < remove_word_min_index:
+                    remove_word_min_index = word_index
                 word_id_dict.pop(word)
+        reindex(word_id_dict, remove_word_min_index)
 
         dat_line =  '' #line for the .dat file
 
